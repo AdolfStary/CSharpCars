@@ -27,9 +27,14 @@ namespace CSharpCarClass
             }
             set
             {
-                if (Level < 0)  throw new Exception ("Don't have enough fuel for the action.");
-                else if (Level > Capacity) _level = Capacity;
+                if (value < 0)
+                {
+                    throw new Exception("Don't have enough fuel for the action.");
+                }
+
+                if (value > Capacity) _level = Capacity;
                 else _level = value;
+                
             }
         }
 
@@ -46,7 +51,6 @@ namespace CSharpCarClass
 
         public void Fill(double liters = 0)
         {
-            Level = Level + liters;
         }
 
     }

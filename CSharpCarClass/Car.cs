@@ -21,7 +21,7 @@ namespace CSharpCarClass
             Color = "Silver";
             MaximumOccupancy = 2;
             FuelEfficiency = 10;
-            Odometer = new Odometer(182000);
+            Odometer = new Odometer(0);
             FuelTank = new FuelTank();
         }
         public Car(string make, string model, string color, int maxOccupancy, double fuelEfficiency, double fuelTankCapacity, double fuelLevel, int odometer)
@@ -44,16 +44,16 @@ namespace CSharpCarClass
         public override string ToString()
         {
             string stringOdometer = "";
-            double availableKms =Math.Round(FuelTank.Level / FuelEfficiency, 0);
+            double availableKms =Math.Round(FuelTank.Level * FuelEfficiency, 0);
             string fuelStatus = FuelTank.Level == 0 ? "that has no fuel left." : $"that has enough fuel to travel {availableKms}KM.";
 
-            for (int i = 1; i < (6 - Odometer.Counter.ToString().Length); i++)
+            for (int i = 1; i <= (6 - Odometer.Counter.ToString().Length); i++)
             {
                 stringOdometer += "0";
             }
             stringOdometer += Odometer.Counter.ToString();
 
-            return $"A {Color} {Make} {Model} with {stringOdometer} on the odometer, {fuelStatus}";
+            return $"A {Color} {Make} {Model} with {stringOdometer}KM on the odometer, {fuelStatus}";
         }
     }
 }

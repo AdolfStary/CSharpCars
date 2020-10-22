@@ -15,9 +15,9 @@ namespace CSharpCarClass
             } 
             set
             {
-                if ((_counter + value) > 999999)
+                if ((value) >= 1000000)
                 {
-                    _counter = (_counter + value) - 999999;
+                    _counter = value - 1000000;
                 }
                 else _counter = value;
             }
