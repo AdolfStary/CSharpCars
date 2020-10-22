@@ -14,6 +14,21 @@ namespace CSharpCarClass
         public Odometer Odometer { get; set; }
         public FuelTank FuelTank { get; set; }
 
+        public Car()
+        {
 
+        }
+
+        public void Drive(double km = 5)
+        {
+
+        }
+
+        public override string ToString()
+        {
+            string stringOdometer = "" + Odometer.Counter;
+            string fuelStatus = "that has enough fuel to travel {}KM.";
+            return $"A {Color} {Make} {Model} with {stringOdometer} on the odometer, {fuelStatus}";
+        }
     }
 }
