@@ -43,8 +43,16 @@ namespace CSharpCarClass
 
         public override string ToString()
         {
-            string stringOdometer = "" + Odometer.Counter;
-            string fuelStatus = "that has enough fuel to travel {}KM.";
+            string stringOdometer = "";
+            double availableKms =Math.Round(FuelTank.Level / FuelEfficiency, 0);
+            string fuelStatus = FuelTank.Level == 0 ? "that has no fuel left." : $"that has enough fuel to travel {availableKms}KM.";
+
+            for (int i = 1; i < (6 - Odometer.Counter.ToString().Length); i++)
+            {
+                stringOdometer += "0";
+            }
+            stringOdometer += Odometer.Counter.ToString();
+
             return $"A {Color} {Make} {Model} with {stringOdometer} on the odometer, {fuelStatus}";
         }
     }
