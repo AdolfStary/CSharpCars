@@ -16,12 +16,29 @@ namespace CSharpCarClass
 
         public Car()
         {
-
+            Make = "Porsche";
+            Model = "Boxster";
+            Color = "Silver";
+            MaximumOccupancy = 2;
+            FuelEfficiency = 10;
+            Odometer = new Odometer(182000);
+            FuelTank = new FuelTank();
+        }
+        public Car(string make, string model, string color, int maxOccupancy, double fuelEfficiency, double fuelTankCapacity, double fuelLevel, int odometer)
+        {
+            Make = make;
+            Model = model;
+            Color = color;
+            MaximumOccupancy = maxOccupancy;
+            FuelEfficiency = fuelEfficiency;
+            Odometer = new Odometer(odometer);
+            FuelTank = new FuelTank(fuelTankCapacity, fuelLevel);
         }
 
-        public void Drive(double km = 5)
+        public void Drive(int km = 5)
         {
-
+            FuelTank.BurnFuel( km/FuelEfficiency );
+            Odometer.Increment( km );
         }
 
         public override string ToString()
