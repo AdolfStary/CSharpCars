@@ -23,6 +23,8 @@ namespace CSharpCarClass
             Odometer = new Odometer(0);
             FuelTank = new FuelTank();
             MaximumOccupancy = new Seat[2];
+
+            // Fill the car with passengers
             for (int i = 0; i < MaximumOccupancy.Length; i++)
             {
                 MaximumOccupancy[i] = new Seat(true);
@@ -38,6 +40,7 @@ namespace CSharpCarClass
             Odometer = new Odometer(odometer);
             FuelTank = new FuelTank(fuelTankCapacity, fuelLevel);
 
+            // Fill the car with passengers
             for (int i = 0; i < maxOccupancy; i++)
             {
                 if(i < currentOccupancy)
@@ -49,7 +52,8 @@ namespace CSharpCarClass
 
         public void Drive(int km = 5)
         {
-            if (GetPassengers() < 1)
+            // Checks if someone is sitting in the driver seat, if so it drives the car
+            if (MaximumOccupancy[0].Occupied == false) // Would work with checking GetPassengers(), but wouldn't work if driver moved into passenger seat so I changed this.
             {
                 Console.WriteLine("And who's supposed to drive?");
             }
@@ -68,6 +72,7 @@ namespace CSharpCarClass
             double availableKms = Math.Round(FuelTank.Level * Engine.FuelEfficiency, 0);
             string fuelStatus = FuelTank.Level == 0 ? "that has no fuel left." : $"that has enough fuel to travel {availableKms}KM.";
 
+            // Making string output more user friendly
             int numPassengers = GetPassengers();
             switch (numPassengers)
             {
@@ -82,6 +87,7 @@ namespace CSharpCarClass
                     break;
             } 
 
+            
             for (int i = 1; i <= (6 - Odometer.Counter.ToString().Length); i++)
             {
                 stringOdometer += "0";
