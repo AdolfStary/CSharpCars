@@ -67,12 +67,22 @@ namespace CSharpCarClass
 
         public override string ToString()
         {
-            string stringOdometer = "";
-            string stringPassengers;
-            double availableKms = Math.Round(FuelTank.Level * Engine.FuelEfficiency, 0);
-            string fuelStatus = FuelTank.Level == 0 ? "that has no fuel left." : $"that has enough fuel to travel {availableKms}KM.";
+            return $"A {Color} {Make} {Model} with {GetOdometerWithZeros()}KM on the odometer, {GetFuelStatus()} "+NumOfPassengersResponse();
+        }
 
-            // Making string output more user friendly
+        public string GetFuelStatus()
+        {
+            return FuelTank.Level == 0 ? "that has no fuel left." : $"that has enough fuel to travel {GetAvailableKms()}KM.";
+        }
+
+        public double GetAvailableKms()
+        {
+            return Math.Round(FuelTank.Level * Engine.FuelEfficiency, 0);
+        }
+
+        public string NumOfPassengersResponse()
+        {
+            string stringPassengers;
             int numPassengers = GetPassengers();
             switch (numPassengers)
             {
@@ -85,18 +95,8 @@ namespace CSharpCarClass
                 default:
                     stringPassengers = $"There are {numPassengers} people inside.";
                     break;
-            } 
-
-            
-            for (int i = 1; i <= (6 - Odometer.Counter.ToString().Length); i++)
-            {
-                stringOdometer += "0";
             }
-            stringOdometer += Odometer.Counter.ToString();
-
-
-
-            return $"A {Color} {Make} {Model} with {stringOdometer}KM on the odometer, {fuelStatus} "+stringPassengers;
+            return stringPassengers;
         }
 
         public int GetPassengers()
@@ -107,6 +107,17 @@ namespace CSharpCarClass
                 if (seat.Occupied == true) numberOfPassengers++;
 
             return numberOfPassengers;
+        }
+
+        // Get odometer as string with zeroes for unused digits
+        public string GetOdometerWithZeros()
+        {
+            string odo = "";
+            for (int i = 1; i <= (6 - Odometer.Counter.ToString().Length); i++)
+            {
+                odo += "0";
+            }
+            return odo += Odometer.Counter.ToString();
         }
     }
 }
