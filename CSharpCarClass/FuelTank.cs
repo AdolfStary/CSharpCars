@@ -51,6 +51,7 @@ namespace CSharpCarClass
 
         public void Fill(double liters = 0)
         {
+            Level = Level + liters;
         }
 
     }
